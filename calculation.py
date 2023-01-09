@@ -27,3 +27,7 @@ def compute_cumulative_returns(df):
     df_cmlative_returns = (df / df_cmlative_returns.iloc[0,:]) - 1
     df_cmlative_returns.iloc[0,:] = 0
     return df_cmlative_returns
+
+#normalize data for plotting
+def normalize_data(df):
+    return (df / df.iloc[0])
