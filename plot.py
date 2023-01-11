@@ -5,6 +5,7 @@ def plot_data(df,title,x_label,y_label):
     ax = df.plot(title=title)
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
+    plt.grid()
     plt.show()
 
 #plot a specficic region of data frame
