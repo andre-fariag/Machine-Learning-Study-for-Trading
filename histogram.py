@@ -7,26 +7,30 @@ import numpy as np
 from util import get_data_frame
 from calculation import compute_daily_returns
 
-def plot_histogram():
+def plot_histogram(symbols):
     
-    #1)gets desired data frame
+    #gets desired data frame
     dates = pd.date_range('2019-01-01','2022-12-31') 
-    symbols = ['IBOV']
     df = get_data_frame(symbols,dates)
 
-    #2)compute daily returns
+    #compute daily returns
     df_daily_return = compute_daily_returns(df)
 
-    #3)plot daily returns in histogram form
-    df_daily_return.hist(bins=30)
+    #plot daily returns in histogram form
+    for symbol in symbols:
+        df_daily_return[symbol].hist(bins=20,label=symbol)
+    
+    #plot mean and standar deviation as vertical lines for reference
+    #mean = df_daily_return.mean().item()
+    #std = df_daily_return.std().item()
+    #print (df_daily_return.kurtosis())
+    #plt.axvline(mean,color='w',linestyle='dashed',linewidth = 2)
+    #plt.axvline(std,color='r',linestyle='dashed',linewidth = 2)
+    #plt.axvline(-std,color='r',linestyle='dashed',linewidth = 2)
 
-    #4)plot mean and standar deviation as vertical lines for reference
-    mean = df_daily_return.mean().item()
-    std = df_daily_return.std().item()
-    plt.axvline(mean,color='w',linestyle='dashed',linewidth = 2)
-    plt.axvline(std,color='r',linestyle='dashed',linewidth = 2)
-    plt.axvline(-std,color='r',linestyle='dashed',linewidth = 2)
+    plt.legend(loc='upper right')
     plt.show()
 
 if __name__ == "__main__":
-    plot_histogram()
+    symbols = ['IBOV','VALE3','BBDC4','XPML11']
+    plot_histogram(symbols)
